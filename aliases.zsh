@@ -53,3 +53,9 @@ function grr
     fi
 }
 
+function vv
+{
+    local FILE=$(fzf)
+    [ -z $FILE ] || vim $FILE
+}
+
