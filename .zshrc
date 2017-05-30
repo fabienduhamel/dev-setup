@@ -98,13 +98,14 @@ bindkey "^p" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 bindkey "^n" down-line-or-beginning-search
 
+# fix ack executable for Linux
+command -v ack &>/dev/null || alias ack='ack-grep'
+
 # fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ack -g "" --ignore-dir .git --ignore-dir Library --ignore-dir Cache --ignore-dir app/cache --ignore-dir .Trash'
 # export FZF_DEFAULT_COMMAND='ag -l --hidden --ignore .git -g ""'
 export FZF_DEFAULT_OPTS='--height 15 --reverse --border'
-# https://github.com/junegunn/fzf/tree/master/shell
-source $ZSH/custom/fzf-completion/completion.zsh
-source $ZSH/custom/fzf-completion/key-bindings.zsh
 
 # Better zsh git prompt with zsh-git-prompt
 source $ZSH/custom/plugins/zsh-git-prompt/zshrc.sh
@@ -149,7 +150,7 @@ git_super_status() {
     if [ "$GIT_CHANGED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ] && [ "$GIT_UNTRACKED" -eq "0" ]; then
       STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
     fi
-    STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX"
+    STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX%{${reset_color}%}%{$bg[yellow]%}"
     echo "$STATUS"
   fi
 }
@@ -179,3 +180,4 @@ build_prompt() {
   prompt_hg
   prompt_end
 }
+
