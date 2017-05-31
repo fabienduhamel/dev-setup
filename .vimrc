@@ -274,7 +274,10 @@ imap KJ <Esc>
 
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 
+" System clipboard
 set clipboard=unnamed
+vnoremap <C-S-c> "+y
+vnoremap <C-S-v> "+p
 
 " reload files when they change on disk (e.g., git checkout)
 set autoread
