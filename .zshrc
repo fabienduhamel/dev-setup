@@ -103,7 +103,10 @@ command -v ack &>/dev/null || alias ack='ack-grep'
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='ack -g "" --ignore-dir .git --ignore-dir Library --ignore-dir Cache --ignore-dir app/cache --ignore-dir .Trash'
+
+# fix executable, ack installs itself as ack-grep on mint
+command -v ack-grep &>/dev/null && FZF_EXECUTABLE="ack-grep" || FZF_EXECUTABLE="ack"
+export FZF_DEFAULT_COMMAND="$FZF_EXECUTABLE -g '' --ignore-dir .git --ignore-dir Library --ignore-dir Cache --ignore-dir app/cache --ignore-dir .Trash"
 # export FZF_DEFAULT_COMMAND='ag -l --hidden --ignore .git -g ""'
 export FZF_DEFAULT_OPTS='--height 15 --reverse --border'
 
