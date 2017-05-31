@@ -112,14 +112,14 @@ source $ZSH/custom/plugins/zsh-git-prompt/zshrc.sh
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_SEPARATOR="  "
-ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[black]%}"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg_bold[green]%}%{●%G%}"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg_bold[magenta]%}%{✖%G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg_bold[red]%}%{✚%G%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg_bold[black]%}%{↓%G%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_bold[black]%}%{↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[black]%}%{…%G%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[black]%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{●%G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[magenta]%}%{✖%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[red]%}%{✚%G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[black]%}%{↓%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[black]%}%{↑%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[black]%}%{…%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
 
 git_super_status() {
   precmd_update_git_vars
