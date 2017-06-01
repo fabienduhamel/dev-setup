@@ -98,9 +98,6 @@ bindkey "^p" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 bindkey "^n" down-line-or-beginning-search
 
-# fix ack executable for Linux
-command -v ack &>/dev/null || alias ack='ack-grep'
-
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

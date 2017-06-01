@@ -51,9 +51,15 @@ set autoindent
 set smartindent
 set wrap
 
+:nmap j gj
+:nmap k gk
+
 " line length
 let &colorcolumn=join(range(121,999),",")
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
+
+" Matching bracket/parenthesis color
+hi MatchParen cterm=none ctermbg=red ctermfg=black
 
 " Sets how many lines of history VIM has to remember
 set history=500
@@ -83,6 +89,17 @@ endif
 
 " For regular expressions turn magic on
 set magic
+
+" https://github.com/christoomey/vim-tmux-navigator
+let g:tmux_navigator_no_mappings = 1
+" These are Alt + hjkl chars
+nnoremap <silent> Ì :TmuxNavigateLeft<cr>
+nnoremap <silent> Ï :TmuxNavigateDown<cr>
+nnoremap <silent> È :TmuxNavigateUp<cr>
+nnoremap <silent> ¬ :TmuxNavigateRight<cr>
+nnoremap <silent> œ :TmuxNavigatePrevious<cr>
+" Write all buffers before navigating from Vim to tmux pane
+let g:tmux_navigator_save_on_switch = 2
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -209,24 +226,13 @@ if exists('$TMUX')  " Support resizing in tmux
   set ttymouse=xterm2
 endif
 
-" Fix Cursor in TMUX
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-" Use ctrl-[hjkl] to move focus between splits!
-" NOTE: https://github.com/christoomey/vim-tmux-navigator now takes care of this
-"nmap <silent> <c-k> :wincmd k<CR>
-"nmap <silent> <c-j> :wincmd j<CR>
-"nmap <silent> <c-h> :wincmd h<CR>
-"nmap <silent> <c-l> :wincmd l<CR>
-
 " vv to generate new vertical split
 nnoremap <silent> vv <C-w>v
+" ss to generate new horizontal split
+nnoremap <silent> ss <C-w>s
+" Smart split
+set splitbelow
+set splitright
 
 " save left pinky - map minus sign to colon!
 nore - :
@@ -298,7 +304,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -g "" -l --hidden --ignore-dir .git --ignore-dir Library --ignore-dir .Trash --ignore-dir app/cache'
+  let g:ctrlp_user_command = 'ag %s -g "" -l --hidden --ignore-dir .git --ignore-dir Library --ignore-dir Cache --ignore-dir .Trash --ignore-dir app/cache --ignore-dir .composer'
 endif
 
 " Current line customization
