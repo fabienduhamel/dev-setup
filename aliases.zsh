@@ -23,6 +23,11 @@ alias gcot='git checkout -t'
 # alias gbpurge='git branch --merged | grep -vE "(master|\*)" | xargs git branch -d'
 alias gmb='git merge-base `git rev-parse --abbrev-ref HEAD`'
 
+# Max OS X aliases
+if [ "$(uname -s)" = "Darwin" ]; then
+    alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -a -s"
+fi
+
 # Find and vim if one result found.
 function vfind
 {
