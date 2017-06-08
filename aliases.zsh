@@ -63,7 +63,7 @@ function grr
 
 function vv
 {
-    local FILE=$(fzf)
+    [ -z "$1" ] && local FILE=$(fzf) || local FILE=$(cd "$1" && fzf)
     [ -z $FILE ] || vim $FILE
 }
 
