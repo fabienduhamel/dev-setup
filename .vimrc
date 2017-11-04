@@ -27,6 +27,7 @@ Plugin 'slim-template/vim-slim'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'dracula/vim'
 
 " required
 call vundle#end()
@@ -250,7 +251,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_close_button = 0
 
-let g:airline_theme='molokai'
+" let g:airline_theme='molokai'
+color dracula
 
 " quickly clear highlights
 map <leader>n :noh<CR>
@@ -302,6 +304,9 @@ endif
 set cursorline
 autocmd InsertEnter * highlight  CursorLine ctermbg=236 ctermfg=None
 autocmd InsertLeave * highlight  CursorLine ctermbg=235 ctermfg=None
+
+" No swap file
+set noswapfile
 
 " NERDTree
 nnoremap <leader>d :NERDTreeToggle<CR>
