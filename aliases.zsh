@@ -23,6 +23,12 @@ alias gcot='git checkout -t'
 # alias gbpurge='git branch --merged | grep -vE "(master|\*)" | xargs git branch -d'
 alias gmb='git merge-base `git rev-parse --abbrev-ref HEAD`'
 
+# git tag and push
+function gtp
+{
+    git tag -m "$1" $1 && git push origin $1
+}
+
 # Max OS X aliases
 if [ "$(uname -s)" = "Darwin" ]; then
     alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -a -s"
