@@ -49,3 +49,5 @@
 [mergetool]
     prompt = false
 
+[rebase]
+	autosquash = true
