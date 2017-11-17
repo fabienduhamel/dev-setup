@@ -50,6 +50,8 @@ set wrap
 
 " Autosave buffers on focus lost except untitled ones
 autocmd CursorHold,CursorHoldI,BufLeave,FocusLost * silent! wall
+:au FocusLost * silent! wa
+:set autowrite
 
 " Move correctlry in wrapped lines
 noremap  <buffer> <silent> j gj
