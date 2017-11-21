@@ -26,6 +26,23 @@ alias gcot='git checkout -t'
 # alias gbpurge='git branch --merged | grep -vE "(master|\*)" | xargs git branch -d'
 alias gmb='git merge-base `git rev-parse --abbrev-ref HEAD`'
 
+function gcfrb
+{
+    PATTERN="$1"
+    if [[ -z $PATTERN ]]; then
+        echo "Usage: $0 pattern"
+        return 1
+    fi
+
+    REBASE_HASH=$(git --no-pager log --pretty="%h %s" | grep -i -A1 "$PATTERN" | tail -n1 | cut -d" " -f1)
+
+    if [[ -z $REBASE_HASH ]]; then
+        echo "Pattern \"$PATTERN\" not found in git log."
+        return 2
+    fi
+
+    git commit --fixup :/$PATTERN && GIT_SEQUENCE_EDITOR=true git rebase -ip $REBASE_HASH
+}
 # git tag and push
 function gtp
 {
