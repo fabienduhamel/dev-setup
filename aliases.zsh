@@ -26,15 +26,16 @@ alias gcot='git checkout -t'
 # alias gbpurge='git branch --merged | grep -vE "(master|\*)" | xargs git branch -d'
 alias gmb='git merge-base `git rev-parse --abbrev-ref HEAD`'
 
+# git commit --fixup + rebase -i --autosquash (from a commit message)
 function gcfrb
 {
-    PATTERN="$1"
+    local PATTERN="$1"
     if [[ -z $PATTERN ]]; then
         echo "Usage: $0 pattern"
         return 1
     fi
 
-    REBASE_HASH=$(git --no-pager log --pretty="%h %s" | grep -i -A1 "$PATTERN" | tail -n1 | cut -d" " -f1)
+    local REBASE_HASH=$(git --no-pager log --pretty="%h %s" | grep -i -A1 "$PATTERN" | tail -n1 | cut -d" " -f1)
 
     if [[ -z $REBASE_HASH ]]; then
         echo "Pattern \"$PATTERN\" not found in git log."
@@ -54,32 +55,10 @@ if [ "$(uname -s)" = "Darwin" ]; then
     alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -a -s"
 fi
 
-# Find and vim if one result found.
-function vfind
-{
-    FILES=$(find $1 -type f -name "$2")
-    FILE_COUNT=`echo $FILES | wc -l`
-    if [ $FILE_COUNT -eq 1 ] && [ ! -z $FILES ]; then
-        vim $FILES
-    else
-        echo $FILES
-    fi
-}
-
-function ffind
-{
-    find $1 -type f -iname \*$2\* 2>/dev/null | grep --color -i $2
-}
-
-function dfind
-{
-    find $1 -type d -iname \*$2\* 2>/dev/null | grep --color -i $2
-}
-
 function grr
 {
-    BRANCH=`git rev-parse --abbrev-ref --symbolic-full-name @{u}`
-    QUESTION='git reset --hard '$BRANCH;
+    local BRANCH=`git rev-parse --abbrev-ref --symbolic-full-name @{u}`
+    local QUESTION='git reset --hard '$BRANCH;
     read -q "REPLY?$QUESTION? (y/n) "
     if [ $REPLY = 'y' ]; then
         echo ""
