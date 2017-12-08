@@ -23,6 +23,7 @@ alias gm='git merge --no-edit'
 alias gmn='git merge --no-ff --no-edit'
 alias gcob='git checkout -b'
 alias gcot='git checkout -t'
+alias gsta='git stash save -u'
 # alias gbpurge='git branch --merged | grep -vE "(master|\*)" | xargs git branch -d'
 alias gmb='git merge-base `git rev-parse --abbrev-ref HEAD`'
 
