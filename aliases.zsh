@@ -1,5 +1,6 @@
 alias lal='ls -lAh'
 alias dua='du -sh `ls -A | grep . | cut -d "'" "'" -f6-`'
+alias grep='grep -n --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 
 function meteo
 {
