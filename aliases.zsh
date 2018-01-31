@@ -48,6 +48,22 @@ function gcfrb
 
     git commit --fixup :/$PATTERN && GIT_SEQUENCE_EDITOR=true git rebase -ip $REBASE_HASH
 }
+
+# increment the semver version as AECF pattern
+function nexttag
+{
+    LEVEL=$1
+    CURRENT_TAG=`git tag | sort -V | tail -1`
+    if [[ $CURRENT_TAG = *"RC"* ]] && [[ -z $LEVEL ]]; then
+        VERSION_PREFIX=$(sed -r 's/^(.+RC).+$/\1/' <<< $CURRENT_TAG)
+        PRERELEASE_VERSION=$(sed -r 's/^.+RC([0-9]+)$/\1/' <<< $CURRENT_TAG)
+        NEXT_PRERELEASE_VERSION=$(($PRERELEASE_VERSION+1))
+        echo $VERSION_PREFIX$NEXT_PRERELEASE_VERSION
+    else
+        echo v$(semver -i $LEVEL $CURRENT_TAG)
+    fi
+}
+
 # git tag and push
 function gtp
 {
