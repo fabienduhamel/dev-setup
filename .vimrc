@@ -28,9 +28,13 @@ Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'dracula/vim'
+Plugin 'junegunn/fzf.vim'
 
 " required
 call vundle#end()
+
+" Add fzf plugin
+set rtp+=~/.fzf
 
 " set 256 colors
 set t_Co=256
@@ -308,6 +312,8 @@ vnoremap <C-S-v> "+p
 
 " reload files when they change on disk (e.g., git checkout)
 set autoread
+au CursorHold,CursorHoldI * checktime
+au FocusGained,BufEnter * :checktime
 
 " highlight whitespace symbols
 hi NonText ctermfg=240 guifg=#666666
