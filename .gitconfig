@@ -46,9 +46,12 @@
 
 [push]
     default = simple
+
 [mergetool]
     prompt = false
 
 [rebase]
     autosquash = true
 
+[merge]
+	tool = meld
