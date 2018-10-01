@@ -57,3 +57,5 @@
 	tool = meld
 [sequence]
 	editor = interactive-rebase-tool
+[remote "origin"]
+	prune = true

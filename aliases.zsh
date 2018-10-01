@@ -7,11 +7,12 @@ function meteo
 }
 
 alias clearswap="su -c 'swapoff -a && swapon -a'"
+alias ping="prettyping"
 
 alias gnd='git diff --name-only'
 compdef _git gnd=git-checkout
 alias gu='git fetch --prune && git up'
-alias gf='git fetch --tags'
+alias gf='git fetch --tags && git blist'
 alias gda='git diff --cached'
 alias gs='git show'
 alias gb='git blist'
