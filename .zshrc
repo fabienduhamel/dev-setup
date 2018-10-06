@@ -56,9 +56,6 @@ if [ -d ~/bin ]; then
     export PATH=$PATH:~/bin
 fi
 
-# Php 7 on Mac OS X
-command -v brew &>/dev/null && export PATH="$(brew --prefix homebrew/php/php71)/bin:$PATH"
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
