@@ -111,7 +111,7 @@ export FZF_DEFAULT_OPTS='--height 15 --reverse --border'
 source $ZSH/custom/plugins/zsh-git-prompt/zshrc.sh
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_SEPARATOR="  "
+ZSH_THEME_GIT_PROMPT_SEPARATOR="%{$fg[black]%}  "
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[black]%}"
 ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{●%G%}"
 ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[magenta]%}%{✖%G%}"
@@ -120,6 +120,8 @@ ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[black]%}%{↓%G%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[black]%}%{↑%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[black]%}%{…%G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
+ZSH_THEME_GIT_PROMPT_MERGING="%{$fg[black]%}|MERGING%{${reset_color}%}%{$bg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_REBASE="%{$fg_bold[black]%} REBASE%{${reset_color}%}%{$bg[yellow]%} "
 
 git_super_status() {
     precmd_update_git_vars
@@ -180,7 +182,8 @@ git_super_status() {
             STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
         fi
 
-        echo "$STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX%{${reset_color}%}%{$bg[yellow]%}"
+        STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX%{${reset_color}%}%{$bg[yellow]%}"
+        echo $STATUS
     fi
 }
 
