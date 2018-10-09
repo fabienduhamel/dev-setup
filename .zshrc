@@ -61,6 +61,9 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
+# For Git language
+export LANGUAGE=en_US.UTF-8
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -119,37 +122,66 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[black]%}%{…%G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
 
 git_super_status() {
-  precmd_update_git_vars
+    precmd_update_git_vars
+
     if [ -n "$__CURRENT_GIT_STATUS" ]; then
-    STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH"
-    if [ "$GIT_BEHIND" -ne "0" ] || [ "$GIT_AHEAD" -ne "0" ]; then
-      STATUS="$STATUS "
+        local STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH"
+        local clean=1
+
+        if [ -n "$GIT_REBASE" ] && [ "$GIT_REBASE" != "0" ]; then
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_REBASE$GIT_REBASE"
+        elif [ "$GIT_MERGING" -ne "0" ]; then
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_MERGING"
+        fi
+
+        if [ "$GIT_LOCAL_ONLY" -ne "0" ]; then
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_LOCAL"
+        elif [ "$ZSH_GIT_PROMPT_SHOW_UPSTREAM" -gt "0" ] && [ -n "$GIT_UPSTREAM" ] && [ "$GIT_UPSTREAM" != ".." ]; then
+            local parts=( "${(s:/:)GIT_UPSTREAM}" )
+            if [ "$ZSH_GIT_PROMPT_SHOW_UPSTREAM" -eq "2" ] && [ "$parts[2]" = "$GIT_BRANCH" ]; then
+                GIT_UPSTREAM="$parts[1]"
+            fi
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UPSTREAM_FRONT$GIT_UPSTREAM$ZSH_THEME_GIT_PROMPT_UPSTREAM_END"
+        fi
+
+        if [ "$GIT_BEHIND" -ne "0" ] || [ "$GIT_AHEAD" -ne "0" ]; then
+            STATUS="$STATUS "
+        fi
+        if [ "$GIT_BEHIND" -ne "0" ]; then
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND"
+        fi
+        if [ "$GIT_AHEAD" -ne "0" ]; then
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD"
+        fi
+
+        STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
+
+        if [ "$GIT_STAGED" -ne "0" ]; then
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED"
+            clean=0
+        fi
+        if [ "$GIT_CONFLICTS" -ne "0" ]; then
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS"
+            clean=0
+        fi
+        if [ "$GIT_CHANGED" -ne "0" ]; then
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED"
+            clean=0
+        fi
+        if [ "$GIT_UNTRACKED" -ne "0" ]; then
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED$GIT_UNTRACKED"
+            clean=0
+        fi
+        # if [ "$GIT_STASHED" -ne "0" ]; then
+        #     STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STASHED$GIT_STASHED"
+        #     clean=0
+        # fi
+        if [ "$clean" -eq "1" ]; then
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
+        fi
+
+        echo "$STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX%{${reset_color}%}%{$bg[yellow]%}"
     fi
-    if [ "$GIT_BEHIND" -ne "0" ]; then
-      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND"
-    fi
-    if [ "$GIT_AHEAD" -ne "0" ]; then
-      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD"
-    fi
-    STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
-    if [ "$GIT_STAGED" -ne "0" ]; then
-      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED"
-    fi
-    if [ "$GIT_CONFLICTS" -ne "0" ]; then
-      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS"
-    fi
-    if [ "$GIT_CHANGED" -ne "0" ]; then
-      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED"
-    fi
-    if [ "$GIT_UNTRACKED" -ne "0" ]; then
-      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED"
-    fi
-    if [ "$GIT_CHANGED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ] && [ "$GIT_UNTRACKED" -eq "0" ]; then
-      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
-    fi
-    STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX%{${reset_color}%}%{$bg[yellow]%}"
-    echo "$STATUS"
-  fi
 }
 
 # Override agnoster theme
@@ -157,10 +189,14 @@ prompt_time () {
     prompt_segment black grey "%*"
 }
 
-prompt_ret_status () {
-    local RET_STATUS=$?
-    local RET_CHAR='\xE2\x97\x8F'
-    [[ $RET_STATUS -eq 0 ]] && prompt_segment black green "$RET_CHAR" || prompt_segment black red "$RET_CHAR"
+prompt_status() {
+  local -a symbols
+
+  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘" || symbols+="%{%F{green}%}●"
+  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
+  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
+
+  [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
 }
 
 prompt_git_super_status () {
@@ -168,7 +204,8 @@ prompt_git_super_status () {
 }
 
 build_prompt() {
-  prompt_ret_status
+  RETVAL=$?
+  prompt_status
   prompt_virtualenv
   prompt_time
   prompt_dir
@@ -177,4 +214,3 @@ build_prompt() {
   prompt_hg
   prompt_end
 }
-
