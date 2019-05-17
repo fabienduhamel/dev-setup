@@ -8,6 +8,7 @@ function meteo
 
 alias clearswap="su -c 'swapoff -a && swapon -a'"
 alias ping="prettyping"
+alias please='sudo $(fc -ln -1)'
 
 alias gnd='git diff --name-only'
 compdef _git gnd=git-checkout
