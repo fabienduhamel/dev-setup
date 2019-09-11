@@ -31,6 +31,7 @@
     fl           = log -u --follow
     la           = "!git config -l | grep alias | cut -c 7-"
     up           = !git fetch && git rebase --autostash FETCH_HEAD
+    remove-tags  = "!f() { git tag -l ${1} | xargs -I % echo \"git push --delete origin % ; git tag -d %\" | sh; }; f"
 
 [tag]
     sort = version:refname
