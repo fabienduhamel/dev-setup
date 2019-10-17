@@ -34,7 +34,7 @@
     remove-tags  = "!f() { git tag -l ${1} | xargs -I % echo \"git push --delete origin % ; git tag -d %\" | sh; }; f"
 
 [tag]
-    sort = version:refname
+    sort = -version:refname
 
 [core]
     editor       = vim
