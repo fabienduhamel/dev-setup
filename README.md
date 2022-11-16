@@ -8,3 +8,11 @@ Contains mandatory dotfiles and other stuff for personal dev :)
 ./link.sh      # Removes hard files and reates symbolic links
 ./unlink.sh    # Deletes symbolic links and recreates hard files
 ```
+
+## Brew packages
+
+bat curl diff-so-fancy fzf gh jq yq ripgrep telnet tldr wget
+WebPQuickLook
+borgbackup exiftool ffmpeg imagemagick rsync
+
+
