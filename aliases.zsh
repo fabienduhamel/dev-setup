@@ -9,7 +9,8 @@ function meteo
 
 alias clearswap="su -c 'swapoff -a && swapon -a'"
 alias ping="prettyping"
-alias cat="bat -p"
+alias cat="bat -pp"
+alias less="bat -p"
 alias please='sudo $(fc -ln -1)'
 
 alias gnd='git diff --name-only'
@@ -78,6 +79,7 @@ function gtp
 # Max OS X aliases
 if [ "$(uname -s)" = "Darwin" ]; then
     alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -a -s"
+    alias python="/usr/bin/python3"
 fi
 
 function grr
