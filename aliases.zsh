@@ -7,12 +7,15 @@ function meteo
     curl -4 "wttr.in/$1"
 }
 
+# Linux
 alias clearswap="su -c 'swapoff -a && swapon -a'"
+
 alias ping="prettyping"
 alias cat="bat -pp"
 alias less="bat -p"
 alias please='sudo $(fc -ln -1)'
 
+# Git
 alias gnd='git diff --name-only'
 compdef _git gnd=git-checkout
 alias gu='git fetch --prune && git up'
@@ -55,7 +58,24 @@ function gcfrb
     git commit --fixup :/$PATTERN && GIT_SEQUENCE_EDITOR=true git rebase -ip $REBASE_HASH
 }
 
+# git tag and push
+function gtp
+{
+    git tag -m "$1" $1 && git push origin $1
+}
+
 # increment the semver version as AECF pattern
+function grr
+{
+    local BRANCH=`git rev-parse --abbrev-ref --symbolic-full-name @{u}`
+    local QUESTION='git reset --hard '$BRANCH;
+    read -q "REPLY?$QUESTION? (y/n) "
+    if [ $REPLY = 'y' ]; then
+        echo ""
+        git reset --hard $BRANCH
+    fi
+}
+
 function nexttag
 {
     LEVEL=$1
@@ -70,32 +90,35 @@ function nexttag
     fi
 }
 
-# git tag and push
-function gtp
-{
-    git tag -m "$1" $1 && git push origin $1
-}
-
 # Max OS X aliases
 if [ "$(uname -s)" = "Darwin" ]; then
     alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -a -s"
     alias python="/usr/bin/python3"
 fi
 
-function grr
-{
-    local BRANCH=`git rev-parse --abbrev-ref --symbolic-full-name @{u}`
-    local QUESTION='git reset --hard '$BRANCH;
-    read -q "REPLY?$QUESTION? (y/n) "
-    if [ $REPLY = 'y' ]; then
-        echo ""
-        git reset --hard $BRANCH
-    fi
-}
-
 function vv
 {
     [ -z "$1" ] && local FILE=$(fzf) || local FILE=$(cd "$1" && fzf)
     [ -z $FILE ] || vim $FILE
+}
+
+# Picture sorting
+function pic-ini-sort
+{
+    mkdir RAW delete
+}
+
+function pic-clean-raws
+{
+    for file in $(ls RAW | grep .RW2); do JPG=${file%.*}.JPG; ls . | grep -E "^$JPG$" && echo "$JPG exists" || mv RAW/$file delete ; done
+}
+
+function pic-mkdir-export
+{
+    mkdir export
+    ls *.JPG &>/dev/null && mv *.JPG export/
+    ls *.jpg &>/dev/null && mv *.jpg export/
+    ls *.MP4 &>/dev/null && mv *.MP4 export/
+    ls *.mp4 &>/dev/null && mv *.mp4 export/
 }
 

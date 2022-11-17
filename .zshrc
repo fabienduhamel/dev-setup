@@ -45,12 +45,16 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git safe-paste symfony2 composer bower docker docker-compose)
+plugins=(git safe-paste composer docker docker-compose)
 
 # User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-# export MANPATH="/usr/local/man:$MANPATH"
+
+# go
+if [ -d /usr/local/go/bin ]; then
+    export PATH=$PATH:/usr/local/go/bin
+fi
 
 if [ -d ~/bin ]; then
     export PATH=$PATH:~/bin
@@ -98,6 +102,9 @@ bindkey "^p" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 bindkey "^n" down-line-or-beginning-search
 
+# load custom theme conf
+[ -f "$ZSH_CUSTOM/zsh-custom-agnoster-theme" ] && source $ZSH_CUSTOM/zsh-custom-agnoster-theme
+
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -107,113 +114,14 @@ export FZF_DEFAULT_COMMAND="$FZF_EXECUTABLE -g '' --ignore-dir .git --ignore-dir
 # export FZF_DEFAULT_COMMAND='ag -l --hidden --ignore .git -g ""'
 export FZF_DEFAULT_OPTS='--height 15 --reverse --border'
 
-# Better zsh git prompt with zsh-git-prompt
-source $ZSH/custom/plugins/zsh-git-prompt/zshrc.sh
-ZSH_THEME_GIT_PROMPT_PREFIX=""
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_SEPARATOR="%{$fg[black]%}  "
-ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[black]%}"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{●%G%}"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[magenta]%}%{✖%G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[red]%}%{✚%G%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[black]%}%{↓%G%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[black]%}%{↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[black]%}%{…%G%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
-ZSH_THEME_GIT_PROMPT_MERGING="%{$fg[black]%}|MERGING%{${reset_color}%}%{$bg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_REBASE="%{$fg_bold[black]%} REBASE%{${reset_color}%}%{$bg[yellow]%} "
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-git_super_status() {
-    precmd_update_git_vars
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/fab/Dev/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fab/Dev/google-cloud-sdk/path.zsh.inc'; fi
 
-    if [ -n "$__CURRENT_GIT_STATUS" ]; then
-        local STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH"
-        local clean=1
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/fab/Dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fab/Dev/google-cloud-sdk/completion.zsh.inc'; fi
 
-        if [ -n "$GIT_REBASE" ] && [ "$GIT_REBASE" != "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_REBASE$GIT_REBASE"
-        elif [ "$GIT_MERGING" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_MERGING"
-        fi
+# colorls
+source $(dirname $(gem which colorls))/tab_complete.sh
 
-        if [ "$GIT_LOCAL_ONLY" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_LOCAL"
-        elif [ "$ZSH_GIT_PROMPT_SHOW_UPSTREAM" -gt "0" ] && [ -n "$GIT_UPSTREAM" ] && [ "$GIT_UPSTREAM" != ".." ]; then
-            local parts=( "${(s:/:)GIT_UPSTREAM}" )
-            if [ "$ZSH_GIT_PROMPT_SHOW_UPSTREAM" -eq "2" ] && [ "$parts[2]" = "$GIT_BRANCH" ]; then
-                GIT_UPSTREAM="$parts[1]"
-            fi
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UPSTREAM_FRONT$GIT_UPSTREAM$ZSH_THEME_GIT_PROMPT_UPSTREAM_END"
-        fi
-
-        if [ "$GIT_BEHIND" -ne "0" ] || [ "$GIT_AHEAD" -ne "0" ]; then
-            STATUS="$STATUS "
-        fi
-        if [ "$GIT_BEHIND" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND"
-        fi
-        if [ "$GIT_AHEAD" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD"
-        fi
-
-        STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
-
-        if [ "$GIT_STAGED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED"
-            clean=0
-        fi
-        if [ "$GIT_CONFLICTS" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS"
-            clean=0
-        fi
-        if [ "$GIT_CHANGED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED"
-            clean=0
-        fi
-        if [ "$GIT_UNTRACKED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED$GIT_UNTRACKED"
-            clean=0
-        fi
-        # if [ "$GIT_STASHED" -ne "0" ]; then
-        #     STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STASHED$GIT_STASHED"
-        #     clean=0
-        # fi
-        if [ "$clean" -eq "1" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
-        fi
-
-        STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX%{${reset_color}%}%{$bg[yellow]%}"
-        echo $STATUS
-    fi
-}
-
-# Override agnoster theme
-prompt_time () {
-    prompt_segment black grey "%*"
-}
-
-prompt_status() {
-  local -a symbols
-
-  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘" || symbols+="%{%F{green}%}●"
-  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
-  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
-
-  [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
-}
-
-prompt_git_super_status () {
-    [ -z "$__CURRENT_GIT_STATUS" ] || prompt_segment yellow black " `git_super_status`"
-}
-
-build_prompt() {
-  RETVAL=$?
-  prompt_status
-  prompt_virtualenv
-  prompt_time
-  prompt_dir
-  prompt_git_super_status
-  prompt_bzr
-  prompt_hg
-  prompt_end
-}
