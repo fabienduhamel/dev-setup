@@ -111,9 +111,9 @@ bindkey "^n" down-line-or-beginning-search
 # fix executable, ack installs itself as ack-grep on mint
 command -v ack-grep &>/dev/null && FZF_EXECUTABLE="ack-grep" || FZF_EXECUTABLE="ack"
 export FZF_DEFAULT_COMMAND="$FZF_EXECUTABLE -g '' --ignore-dir .git --ignore-dir Library --ignore-dir Cache --ignore-dir app/cache --ignore-dir .Trash"
-# export FZF_DEFAULT_COMMAND='ag -l --hidden --ignore .git -g ""'
 export FZF_DEFAULT_OPTS='--height 15 --reverse --border'
 
+# brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # The next line updates PATH for the Google Cloud SDK.
