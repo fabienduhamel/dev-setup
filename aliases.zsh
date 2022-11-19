@@ -1,4 +1,4 @@
-alias ls='colorls'
+#alias ls='colorls'
 alias lal='ls -lAh'
 alias dua='du -sh `ls -A | grep . | cut -d "'" "'" -f6-`'
 
@@ -113,12 +113,20 @@ function pic-clean-raws
     for file in $(ls RAW | grep .RW2); do JPG=${file%.*}.JPG; ls . | grep -E "^$JPG$" && echo "$JPG exists" || mv RAW/$file delete ; done
 }
 
+function pic-clean-jpegs
+{
+    for file in $(ls . | grep .JPG); do
+        RAW=${file%.*}.RW2;
+        ls RAW | grep -E "$RAW$" && echo "$RAW exists" || mv $file delete
+    done
+}
+
 function pic-mkdir-export
 {
     mkdir export
-    ls *.JPG &>/dev/null && mv *.JPG export/
-    ls *.jpg &>/dev/null && mv *.jpg export/
-    ls *.MP4 &>/dev/null && mv *.MP4 export/
-    ls *.mp4 &>/dev/null && mv *.mp4 export/
+    ls *.JPG && mv *.JPG export/
+    ls *.jpg && mv *.jpg export/
+    ls *.MP4 && mv *.MP4 export/
+    ls *.mp4 && mv *.mp4 export/
 }
 
