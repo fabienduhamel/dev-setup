@@ -117,7 +117,7 @@ function pic-clean-jpegs
 {
     for file in $(ls . | grep .JPG); do
         RAW=${file%.*}.RW2;
-        ls RAW | grep -E "$RAW$" && echo "$RAW exists" || mv $file delete
+        ls . | grep -E "$RAW$" && echo "$RAW exists" || mv $file delete
     done
 }
 
