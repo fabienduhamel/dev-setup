@@ -116,12 +116,12 @@ export FZF_DEFAULT_OPTS='--height 15 --reverse --border'
 # brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/fab/Dev/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fab/Dev/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/fab/Dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fab/Dev/google-cloud-sdk/completion.zsh.inc'; fi
-
 # colorls
 source $(dirname $(gem which colorls))/tab_complete.sh
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/fabien/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fabien/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/fabien/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fabien/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
