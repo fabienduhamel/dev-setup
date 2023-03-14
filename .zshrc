@@ -45,7 +45,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git safe-paste composer docker docker-compose)
+plugins=(git safe-paste composer docker docker-compose aws)
 
 # User configuration
 
@@ -103,7 +103,7 @@ bindkey "^[[B" down-line-or-beginning-search
 bindkey "^n" down-line-or-beginning-search
 
 # load custom theme conf
-[ -f "$ZSH_CUSTOM/zsh-custom-agnoster-theme" ] && source $ZSH_CUSTOM/zsh-custom-agnoster-theme
+[ -f "$ZSH_CUSTOM/zsh-custom-theme" ] && source $ZSH_CUSTOM/zsh-custom-theme
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -125,3 +125,4 @@ if [ -f '/Users/fabien/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/User
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/fabien/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fabien/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+

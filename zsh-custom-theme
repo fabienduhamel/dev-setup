@@ -1,4 +1,4 @@
-# Better zsh git prompt with zsh-git-prompt
+# Better zsh git prompt with zsh-git-prompt and agnoster theme
 source $ZSH/custom/plugins/zsh-git-prompt/zshrc.sh
 ZSH_THEME_GIT_PROMPT_PREFIX="%b%{$fg[blue]%} %{$bg[yellow]%}%{$fg[black]%}  "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$bg[yellow]%}"
@@ -21,4 +21,10 @@ build_prompt() {
 }
 
 PROMPT='%{%f%b%k%}%(?.%B%F{green}√.%F{red}?%?)%f%b$(build_prompt)%b '
+
+# zsh-aws-prompt
+export ZSH_THEME_AWS_PROFILE_PREFIX="☁️. AWS profile: %B%{$fg[yellow]%}"
+export ZSH_THEME_AWS_PROFILE_SUFFIX="%B"
+export ZSH_THEME_AWS_REGION_PREFIX="%{$fg[magenta]%}("
+export ZSH_THEME_AWS_REGION_SUFFIX=")%{$reset_color%}%b"
 

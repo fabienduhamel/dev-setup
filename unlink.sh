@@ -11,10 +11,10 @@ function unlink
 set -e
 set -x
 
-unlink ~/.oh-my-zsh/custom/aliases.zsh               aliases.zsh
-unlink ~/.oh-my-zsh/custom/zsh-custom-agnoster-theme zsh-custom-agnoster-theme
-unlink ~/.gitconfig                                  .gitconfig
-unlink ~/.gitignore_global                           .gitignore_global
-unlink ~/.zshrc                                      .zshrc
-unlink ~/.vimrc                                      .vimrc
+unlink ~/.oh-my-zsh/custom/aliases.zsh      aliases.zsh
+unlink ~/.oh-my-zsh/custom/zsh-custom-theme zsh-custom-theme
+unlink ~/.gitconfig                         .gitconfig
+unlink ~/.gitignore_global                  .gitignore_global
+unlink ~/.zshrc                             .zshrc
+unlink ~/.vimrc                             .vimrc
 
