@@ -45,7 +45,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git safe-paste composer docker docker-compose aws)
+plugins=(git safe-paste composer docker docker-compose aws helm kubectl)
 
 # User configuration
 
@@ -119,6 +119,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # colorls
 source $(dirname $(gem which colorls))/tab_complete.sh
 
+# helm completion
+command -v helm && source <(helm completion zsh)
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/fabien/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fabien/Downloads/google-cloud-sdk/path.zsh.inc'; fi
