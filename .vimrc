@@ -30,6 +30,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'dracula/vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'morhetz/gruvbox'
+Plugin 'hashivim/vim-terraform'
+Plugin 'joshdick/onedark.vim'
 
 " required
 call vundle#end()
@@ -286,8 +288,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_close_button = 0
 
+" for gruvbox theme
 let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+
+colorscheme onedark
+
 set termguicolors
 
 " quickly clear highlights
