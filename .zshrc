@@ -149,10 +149,10 @@ source $(dirname $(gem which colorls))/tab_complete.sh
 command -v helm && source <(helm completion zsh)
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/fabien/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fabien/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/fabien/Dev/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fabien/Dev/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/fabien/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fabien/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/fabien/Dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fabien/Dev/google-cloud-sdk/completion.zsh.inc'; fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
