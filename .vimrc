@@ -29,6 +29,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'dracula/vim'
 Plugin 'junegunn/fzf.vim'
+Plugin 'morhetz/gruvbox'
 
 " required
 call vundle#end()
@@ -285,8 +286,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_close_button = 0
 
-" let g:airline_theme='molokai'
-color dracula
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
+set termguicolors
 
 " quickly clear highlights
 map <leader>n :noh<CR>
