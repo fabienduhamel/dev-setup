@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# removes the file in current filesystem
+# and replaces it with a new copy of the file in this directory
+
 function unlink
 {
     set +e
@@ -11,10 +14,10 @@ function unlink
 set -e
 set -x
 
-unlink ~/.oh-my-zsh/custom/aliases.zsh      aliases.zsh
-unlink ~/.oh-my-zsh/custom/zsh-custom-theme zsh-custom-theme
-unlink ~/.gitconfig                         .gitconfig
-unlink ~/.gitignore_global                  .gitignore_global
-unlink ~/.zshrc                             .zshrc
-unlink ~/.vimrc                             .vimrc
+unlink ~/.oh-my-zsh/custom/aliases.zsh aliases.zsh
+unlink ~/.p10k.zsh                     .p10k.zsh
+unlink ~/.gitconfig                    .gitconfig
+unlink ~/.gitignore_global             .gitignore_global
+unlink ~/.zshrc                        .zshrc
+unlink ~/.vimrc                        .vimrc
 

@@ -1,4 +1,4 @@
-#alias ls='colorls'
+alias ls='colorls'
 alias lal='ls -lAh'
 alias dua='du -sh `ls -A | grep . | cut -d "'" "'" -f6-`'
 
@@ -11,8 +11,8 @@ function meteo
 alias clearswap="su -c 'swapoff -a && swapon -a'"
 
 alias ping="prettyping"
-alias cat="bat -pp"
-alias less="bat -p"
+alias cat="bat -pp --color=always"
+alias less="bat -p --color=always"
 alias please='sudo $(fc -ln -1)'
 
 # Git

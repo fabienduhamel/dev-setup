@@ -13,7 +13,7 @@ Contains mandatory dotfiles and other stuff for personal dev :)
 
 ```sh
 # dev
-brew install bat curl diff-so-fancy fzf gh jq yq ripgrep telnet tldr wget node yarn git-interactive-rebase-tool prettyping
+brew install bat curl diff-so-fancy fzf gh jq yq ripgrep telnet tldr wget node yarn git-interactive-rebase-tool prettyping ack
 # others
 brew install WebPQuickLook borgbackup exiftool ffmpeg imagemagick rsync
 ```
@@ -34,3 +34,4 @@ sudo gem install colorls
 # instant-markdown-d
 sudo yarn global add instant-markdown-d
 ```
+
