@@ -9,6 +9,14 @@ Contains mandatory dotfiles and other stuff for personal dev :)
 ./unlink.sh    # Deletes symbolic links and recreates hard files
 ```
 
+## ZSH installation
+
+Follow:
+
+- [https://ohmyz.sh/#install](https://ohmyz.sh/#install)
+- [https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#installation](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#installation)
+
+
 ## Brew packages
 
 ```sh
