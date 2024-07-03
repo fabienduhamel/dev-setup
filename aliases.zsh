@@ -39,6 +39,8 @@ alias glg='git lg'
 alias gll='git ll'
 alias gmb='git merge-base `git rev-parse --abbrev-ref HEAD`'
 
+alias colorpalette='for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done'
+
 # git commit --fixup + rebase -i --autosquash (from a commit message)
 function gcfrb
 {

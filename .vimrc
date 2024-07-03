@@ -27,6 +27,7 @@ Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'dracula/vim'
+Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'hashivim/vim-terraform'
@@ -119,7 +120,7 @@ command! -bang -nargs=* Ag
   \                 <bang>0)
 
 " Tab navigation
-nnoremap td  :tabclose<CR>
+nnoremap td :tabclose<CR>
 nnoremap tl :tabnext<CR>
 nnoremap th :tabprev<CR>
 nnoremap tn :tabnew<CR>
