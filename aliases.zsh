@@ -105,9 +105,26 @@ function vv
 }
 
 # Picture sorting
-function pic-ini-sort
-{
-    mkdir RAW delete
+
+function pic-init-sort {
+    mkdir -p mp4 raw jpg
+
+    IFS=$'\n'
+
+
+    for file in $(\ls | grep -E \.'(MP4|mp4)'); do
+        mv "$file" mp4/
+    done
+
+    for file in $(\ls | grep -E \.'(JPG|jpg)'); do
+        RAW="${file%.*}.RW2"
+        if [ -e "$RAW" ]; then
+            mv "$file" raw/
+            mv "$RAW" raw/
+        else
+            mv "$file" jpg/
+        fi
+    done
 }
 
 function pic-clean-raws
@@ -122,13 +139,3 @@ function pic-clean-jpegs
         ls . | grep -E "$RAW$" && echo "$RAW exists" || mv $file delete
     done
 }
-
-function pic-mkdir-export
-{
-    mkdir export
-    ls *.JPG && mv *.JPG export/
-    ls *.jpg && mv *.jpg export/
-    ls *.MP4 && mv *.MP4 export/
-    ls *.mp4 && mv *.mp4 export/
-}
-
