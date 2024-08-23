@@ -129,13 +129,15 @@ function pic-init-sort {
 
 function pic-clean-raws
 {
-    for file in $(ls RAW | grep .RW2); do JPG=${file%.*}.JPG; ls . | grep -E "^$JPG$" && echo "$JPG exists" || mv RAW/$file delete ; done
+    mkdir -p delete
+    for file in $(\ls RAW | grep .RW2); do JPG=${file%.*}.JPG; ls . | grep -E "^$JPG$" && echo "$JPG exists" || mv RAW/$file delete ; done
 }
 
 function pic-clean-jpegs
 {
-    for file in $(ls . | grep .JPG); do
+    mkdir -p delete
+    for file in $(\ls . | grep .JPG); do
         RAW=${file%.*}.RW2;
-        ls . | grep -E "$RAW$" && echo "$RAW exists" || mv $file delete
+        \ls . | grep -E "$RAW$" && echo "$RAW exists" || mv $file delete/
     done
 }
