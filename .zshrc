@@ -156,3 +156,6 @@ if [ -f '/Users/fabien/Dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/User
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+command -v atuin && eval "$(atuin init zsh)"
+
