@@ -21,7 +21,7 @@ Follow:
 
 ```sh
 # dev
-brew install bat curl diff-so-fancy fzf gh jq yq ripgrep telnet tldr wget node yarn git-interactive-rebase-tool prettyping ack ag btop atuin
+brew install bat curl diff-so-fancy fzf gh jq yq ripgrep telnet tldr wget node yarn git-interactive-rebase-tool prettyping ack ag btop atuin fx tabiew
 # others
 brew install WebPQuickLook borgbackup exiftool ffmpeg imagemagick rsync
 ```
