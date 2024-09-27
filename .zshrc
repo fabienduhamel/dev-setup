@@ -146,7 +146,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 source $(dirname $(gem which colorls))/tab_complete.sh
 
 # helm completion
-command -v helm && source <(helm completion zsh)
+command -v helm >/dev/null && source <(helm completion zsh)
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/fabien/Dev/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fabien/Dev/google-cloud-sdk/path.zsh.inc'; fi
@@ -157,5 +157,7 @@ if [ -f '/Users/fabien/Dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/User
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-command -v atuin && eval "$(atuin init zsh --disable-up-arrow)"
+command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
+
+test -d "$HOME/.cargo" && . "$HOME/.cargo/env"
 
