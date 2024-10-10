@@ -142,9 +142,6 @@ export FZF_DEFAULT_OPTS='--height 15 --reverse --border'
 # brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# colorls
-source $(dirname $(gem which colorls))/tab_complete.sh
-
 # helm completion
 command -v helm >/dev/null && source <(helm completion zsh)
 

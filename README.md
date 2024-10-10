@@ -21,7 +21,7 @@ Follow:
 
 ```sh
 # dev
-brew install bat curl diff-so-fancy fzf gh jq yq ripgrep telnet tldr wget node yarn git-interactive-rebase-tool prettyping ack ag btop atuin fx tabiew
+brew install bat curl diff-so-fancy fzf gh jq yq ripgrep telnet tldr wget node yarn git-interactive-rebase-tool prettyping ack ag btop atuin fx tabiew eza
 # others
 brew install WebPQuickLook borgbackup exiftool ffmpeg imagemagick rsync
 ```
@@ -35,9 +35,6 @@ git clone https://github.com/zsh-git-prompt/zsh-git-prompt.git $ZSH_CUSTOM/plugi
 # vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
-
-# colorls
-sudo gem install colorls
 
 # instant-markdown-d
 sudo yarn global add instant-markdown-d
