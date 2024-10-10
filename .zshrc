@@ -158,3 +158,5 @@ command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
 
 test -d "$HOME/.cargo" && . "$HOME/.cargo/env"
 
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
+
