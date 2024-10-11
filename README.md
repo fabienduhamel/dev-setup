@@ -42,6 +42,10 @@ brew install WebPQuickLook borgbackup exiftool ffmpeg imagemagick rsync
 Neovim/lazyvim instead?
 
 ```sh
+# zsh-autosuggestions (optional)
+# https://github.com/zsh-users/zsh-autosuggestions
+brew install zsh-autosuggestions
+
 # vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
