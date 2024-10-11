@@ -51,3 +51,5 @@ vim +PluginInstall +qall
 sudo yarn global add instant-markdown-d
 ```
 
+[BrightIntosh](https://www.brightintosh.de/) app for XDR brightness on MacOS.
+
