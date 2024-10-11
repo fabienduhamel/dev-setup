@@ -13,8 +13,8 @@ function meteo
 alias clearswap="su -c 'swapoff -a && swapon -a'"
 
 alias ping="prettyping"
-alias cat="bat -pp --color=always"
-alias less="bat -p --color=always"
+alias cat="bat -pp --color=always --theme=ansi"
+alias less="bat -p --color=always --theme=ansi"
 alias please='sudo $(fc -ln -1)'
 
 # Git
