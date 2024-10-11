@@ -18,7 +18,7 @@ Follow:
 
 ### Fonts
 
-Download [SauceCodePro Nerd Font](https://www.nerdfonts.com/font-downloads).
+Download [MesloLG Nerd Font](https://www.nerdfonts.com/font-downloads).
 
 ### Theme
 
