@@ -32,7 +32,7 @@ Import settings from `iterm2/` folder.
 
 ```sh
 # dev
-brew install bat curl diff-so-fancy fzf gh jq yq ripgrep telnet tldr wget node yarn git-interactive-rebase-tool prettyping ack ag btop atuin fx tabiew eza zoxide fd
+brew install bat curl diff-so-fancy fzf gh jq yq ripgrep telnet tldr wget node yarn git-interactive-rebase-tool prettyping ack ag btop atuin fx tabiew eza zoxide fd hub
 # others
 brew install WebPQuickLook borgbackup exiftool ffmpeg imagemagick rsync
 ```

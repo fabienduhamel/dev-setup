@@ -32,6 +32,7 @@
     la           = "!git config -l | grep alias | cut -c 7-"
     up           = !git fetch && git rebase --autostash FETCH_HEAD
     remove-tags  = "!f() { git tag -l ${1} | xargs -I % echo \"git push --delete origin % ; git tag -d %\" | sh; }; f"
+    open         = "!hub browse"
 
 [tag]
     sort = -version:refname
@@ -62,3 +63,6 @@
 	editor = interactive-rebase-tool
 [remote "origin"]
 	prune = true
+
+[hub]
+	protocol = https
