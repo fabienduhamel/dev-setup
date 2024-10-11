@@ -39,10 +39,9 @@ brew install WebPQuickLook borgbackup exiftool ffmpeg imagemagick rsync
 
 ## Others
 
-```sh
-# zsh-git-prompt
-git clone https://github.com/zsh-git-prompt/zsh-git-prompt.git $ZSH_CUSTOM/plugins
+Neovim/lazyvim instead?
 
+```sh
 # vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
