@@ -16,6 +16,17 @@ Follow:
 - [https://ohmyz.sh/#install](https://ohmyz.sh/#install)
 - [https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#installation](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#installation)
 
+### Fonts
+
+Download [SauceCodePro Nerd Font](https://www.nerdfonts.com/font-downloads).
+
+### Theme
+
+Import themes from `iterm2/` folder.
+
+### Setings
+
+Import settings from `iterm2/` folder.
 
 ## Brew packages
 
