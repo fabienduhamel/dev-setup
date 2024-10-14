@@ -46,7 +46,7 @@ Neovim/lazyvim instead?
 # https://github.com/zsh-users/zsh-autosuggestions
 brew install zsh-autosuggestions
 
-# vim
+# vim (abandoned for nvim)
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
