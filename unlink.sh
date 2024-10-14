@@ -20,3 +20,5 @@ unlink ~/.gitignore_global .gitignore_global
 unlink ~/.zshrc .zshrc
 unlink ~/.vimrc .vimrc
 unlink ~/.config/atuin/config.toml .config/atuin/config.toml
+unlink ~/.config/nvim/lua/config/lazy.lua .config/nvim/lua/config/lazy.lua
+unlink ~/.config/nvim/lua/plugins/colorscheme.lua .config/nvim/lua/plugins/colorscheme.lua
