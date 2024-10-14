@@ -154,6 +154,7 @@ function list_by_extension
   
   # Print total size and count for the whole directory
   echo -e "Total\t$total_count\t$total_size\t-"
+  echo "---"
   
   # Loop through each file extension and print its count, size, and mean file size
   for extension in $(find . -type f | sed -n 's/.*\.\([a-zA-Z0-9]*\)$/\1/p' | sort | uniq; echo "<none>"); do
