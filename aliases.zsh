@@ -153,14 +153,33 @@ function list_by_extension
   total_count=$(find . -type f | wc -l)
   
   # Print total size and count for the whole directory
-  echo -e "Total\t$total_count\t$total_size"
-  echo "---"
+  echo -e "Total\t$total_count\t$total_size\t-"
   
-  # Loop through each file extension and print its count and size
+  # Loop through each file extension and print its count, size, and mean file size
   for extension in $(find . -type f | sed -n 's/.*\.\([a-zA-Z0-9]*\)$/\1/p' | sort | uniq); do
     total=$(find . -type f -name "*.$extension" -exec du -ch {} + | grep total$ | awk '{print $1}')
     count=$(find . -type f -name "*.$extension" | wc -l)
-    echo -e "$extension\t$count\t$total"
+
+    # Use platform-specific stat command to get file size in bytes
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      # macOS/BSD stat
+      total_bytes=$(find . -type f -name "*.$extension" -exec stat -f%z {} + | awk '{s+=$1} END {print s}')
+    else
+      # GNU/Linux stat
+      total_bytes=$(find . -type f -name "*.$extension" -exec stat --format="%s" {} + | awk '{s+=$1} END {print s}')
+    fi
+    
+    # Calculate the mean file size (if count > 0 to avoid division by zero)
+    if [ $count -gt 0 ]; then
+      mean_bytes=$((total_bytes / count))
+    else
+      mean_bytes=0
+    fi
+    
+    # Convert mean bytes to human-readable format
+    mean_size=$(numfmt --to=iec-i --suffix=B $mean_bytes)
+    
+    echo -e "$extension\t$count\t$total\t$mean_size"
   done | sort -hr -k3
 }
 
