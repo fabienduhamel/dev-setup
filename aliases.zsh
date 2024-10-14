@@ -156,17 +156,25 @@ function list_by_extension
   echo -e "Total\t$total_count\t$total_size\t-"
   
   # Loop through each file extension and print its count, size, and mean file size
-  for extension in $(find . -type f | sed -n 's/.*\.\([a-zA-Z0-9]*\)$/\1/p' | sort | uniq); do
-    total=$(find . -type f -name "*.$extension" -exec du -ch {} + | grep total$ | awk '{print $1}')
-    count=$(find . -type f -name "*.$extension" | wc -l)
-
-    # Use platform-specific stat command to get file size in bytes
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      # macOS/BSD stat
-      total_bytes=$(find . -type f -name "*.$extension" -exec stat -f%z {} + | awk '{s+=$1} END {print s}')
+  for extension in $(find . -type f | sed -n 's/.*\.\([a-zA-Z0-9]*\)$/\1/p' | sort | uniq; echo "<none>"); do
+    if [ "$extension" = "<none>" ]; then
+      # Handle files without an extension
+      total=$(find . -type f ! -name "*.*" -exec du -ch {} + | grep total$ | awk '{print $1}')
+      count=$(find . -type f ! -name "*.*" | wc -l)
+      total_bytes=$(find . -type f ! -name "*.*" -exec stat -f%z {} + | awk '{s+=$1} END {print s}')
     else
-      # GNU/Linux stat
-      total_bytes=$(find . -type f -name "*.$extension" -exec stat --format="%s" {} + | awk '{s+=$1} END {print s}')
+      # Handle files with an extension
+      total=$(find . -type f -name "*.$extension" -exec du -ch {} + | grep total$ | awk '{print $1}')
+      count=$(find . -type f -name "*.$extension" | wc -l)
+      
+      # Use platform-specific stat command to get file size in bytes
+      if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS/BSD stat
+        total_bytes=$(find . -type f -name "*.$extension" -exec stat -f%z {} + | awk '{s+=$1} END {print s}')
+      else
+        # GNU/Linux stat
+        total_bytes=$(find . -type f -name "*.$extension" -exec stat --format="%s" {} + | awk '{s+=$1} END {print s}')
+      fi
     fi
     
     # Calculate the mean file size (if count > 0 to avoid division by zero)
