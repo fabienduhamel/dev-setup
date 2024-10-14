@@ -145,3 +145,22 @@ function pic-clean-jpegs
         \ls . | grep -E "$RAW$" && echo "$RAW exists" || mv $file delete/
     done
 }
+
+function list_by_extension
+{
+  # Get total size and file count for the directory
+  total_size=$(du -sh . | awk '{print $1}')
+  total_count=$(find . -type f | wc -l)
+  
+  # Print total size and count for the whole directory
+  echo -e "Total\t$total_count\t$total_size"
+  echo "---"
+  
+  # Loop through each file extension and print its count and size
+  for extension in $(find . -type f | sed -n 's/.*\.\([a-zA-Z0-9]*\)$/\1/p' | sort | uniq); do
+    total=$(find . -type f -name "*.$extension" -exec du -ch {} + | grep total$ | awk '{print $1}')
+    count=$(find . -type f -name "*.$extension" | wc -l)
+    echo -e "$extension\t$count\t$total"
+  done | sort -hr -k3
+}
+
