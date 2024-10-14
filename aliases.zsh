@@ -4,6 +4,8 @@ alias top='btop'
 alias lal='ls -lAh'
 alias dua='du -sh `ls -A | grep . | cut -d "'" "'" -f6-`'
 
+alias v='nvim'
+alias vim='nvim'
 alias ide='nvim .'
 
 function meteo

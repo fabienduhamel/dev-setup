@@ -18,7 +18,6 @@ link .p10k.zsh ~/.p10k.zsh
 link .gitconfig ~/.gitconfig
 link .gitignore_global ~/.gitignore_global
 link .zshrc ~/.zshrc
-link .vimrc ~/.vimrc
 link .config/atuin/config.toml ~/.config/atuin/config.toml
 link .config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy.lua
 link .config/nvim/lua/plugins/colorscheme.lua ~/.config/nvim/lua/plugins/colorscheme.lua

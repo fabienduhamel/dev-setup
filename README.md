@@ -39,19 +39,10 @@ brew install WebPQuickLook borgbackup exiftool ffmpeg imagemagick rsync
 
 ## Others
 
-Neovim/lazyvim instead?
-
 ```sh
 # zsh-autosuggestions (optional)
 # https://github.com/zsh-users/zsh-autosuggestions
 brew install zsh-autosuggestions
-
-# vim (abandoned for nvim)
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
-
-# instant-markdown-d
-sudo yarn global add instant-markdown-d
 ```
 
 [BrightIntosh](https://www.brightintosh.de/) app for XDR brightness on MacOS.
