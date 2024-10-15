@@ -1,5 +1,7 @@
 # dev-setup
 
+**DEPRECATED**: See [dotfiles](https://github.com/fabienduhamel/dotfiles).
+
 Contains mandatory dotfiles and other stuff for personal dev :)
 
 ## How to
@@ -46,4 +48,3 @@ brew install zsh-autosuggestions
 ```
 
 [BrightIntosh](https://www.brightintosh.de/) app for XDR brightness on MacOS.
-
